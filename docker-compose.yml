@@ -1,0 +1,77 @@
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/home/vscode/workspace:cached
+    ports:
+      - "${APP_PORT:-8080}:${APP_PORT:-8080}"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      APP_PORT: ${APP_PORT:-8080}
+      HEALTH_MONITOR_PORT: ${HEALTH_MONITOR_PORT:-8081}
+      APP_ADMIN: ${APP_ADMIN}
+      APP_ADMIN_PASSWORD: ${APP_ADMIN_PASSWORD}
+      APP_URL: ${APP_URL}
+      HEALTH_MONITOR_USER: ${HEALTH_MONITOR_USER}
+      HEALTH_MONITOR_PASSWORD: ${HEALTH_MONITOR_PASSWORD}
+      HEALTH_MONITOR_URL: ${HEALTH_MONITOR_URL}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_APP_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_APP_PASSWORD}
+      STORAGE_PROJECT_URL: ${STORAGE_PROJECT_URL}
+      STORAGE_SERVICE_ROLE_API_KEY: ${STORAGE_SERVICE_ROLE_API_KEY}
+      STORAGE_BUCKET_AVATAR: ${STORAGE_BUCKET_AVATAR}
+      STORAGE_EXPIRES_IN: ${STORAGE_EXPIRES_IN}
+    networks:
+      - portfolio-network
+
+  health-monitor:
+    build:
+      context: ./health-monitor
+      dockerfile: Dockerfile
+    tty: true
+    stdin_open: true
+    volumes:
+      - .:/home/vscode/workspace:cached
+    ports:
+      - "${HEALTH_MONITOR_PORT:-8081}:${HEALTH_MONITOR_PORT:-8081}"
+    environment:
+      HEALTH_MONITOR_PORT: ${HEALTH_MONITOR_PORT:-8081}
+      HEALTH_MONITOR_USER: ${HEALTH_MONITOR_USER}
+      HEALTH_MONITOR_PASSWORD: ${HEALTH_MONITOR_PASSWORD}
+    networks:
+      - portfolio-network
+
+  db:
+    image: postgres:17
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      TZ: Asia/Tokyo
+      POSTGRES_USER: ${POSTGRES_ROOT_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_ROOT_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"${POSTGRES_ROOT_USER}\" -d \"${POSTGRES_DB}\""]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - portfolio-network
+        
+volumes:
+    db-data: {}
+
+networks:
+  portfolio-network:
+    name: portfolio-network

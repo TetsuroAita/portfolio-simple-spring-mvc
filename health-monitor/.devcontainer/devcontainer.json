@@ -1,0 +1,26 @@
+{
+    "name": "portfolio-health-monitor",
+    "dockerComposeFile": ["../../docker-compose.yml"],
+    "service": "health-monitor",
+    "workspaceFolder": "/home/vscode/workspace/health-monitor",
+    "postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+    "remoteUser": "vscode",
+    "runServices": ["health-monitor"],
+    "containerEnv": {
+        "LANG": "ja-JP.UTF-8",
+        "LC_ALL": "ja-JP.UTF-8",
+        "TZ": "Asia/Tokyo"
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "java.compile.nullAnalysis.mode": "disabled",
+                "java.configuration.updateBuildConfiguration": "automatic"
+            },
+            "extensions": [
+                "vscjava.vscode-java-pack",
+                "vscjava.vscode-spring-initializr"
+            ]
+        }
+    }
+}

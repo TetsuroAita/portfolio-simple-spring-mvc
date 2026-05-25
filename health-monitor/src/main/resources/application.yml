@@ -1,0 +1,8 @@
+spring:
+  security:
+    user: 
+      name: ${HEALTH_MONITOR_USER}
+      password: ${HEALTH_MONITOR_PASSWORD}
+
+server:
+  port: ${HEALTH_MONITOR_PORT:8081}

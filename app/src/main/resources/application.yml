@@ -1,0 +1,72 @@
+spring:
+  application:
+    name: portfolio-simple-spring-mvc
+
+  profiles:
+    active: dev
+
+  security:
+    user:
+      name: ${APP_ADMIN}
+      password: ${APP_ADMIN_PASSWORD}
+    
+  mvc:
+    throw-exception-if-no-handler-found: true
+
+  thymeleaf:
+    cache: false
+
+  web:
+    resources:
+      add-mappings: true
+      cache:
+        period: 0
+        cachecontrol:
+          max-age: 0
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        default_schema: app
+        format_sql: false
+        show_sql: false
+    open-in-view: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    default-property-inclusion: non_null
+    property-naming-strategy: SNAKE_CASE
+    deserialization:
+      fail-on-unknown-properties: false
+
+scheduler:
+  delete-avatars:
+    fixed-rate-ms: 3600000
+    initial-delay: 3600000
+
+storage:
+  project-url: ${STORAGE_PROJECT_URL}
+  api-key: ${STORAGE_SERVICE_ROLE_API_KEY}
+  bucket-name-avatar: ${STORAGE_BUCKET_AVATAR}
+  expires-in: ${STORAGE_EXPIRES_IN}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      showdetails: always
+
+server:
+  port: ${APP_PORT:8080}

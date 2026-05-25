@@ -1,0 +1,134 @@
+<div th:replace="~{layout :: layout(~{::content})}">
+    <div th:fragment="content">
+        <div class="container">
+            <div class="container-title">
+                <h1 th:text="${title}"></h1>
+            </div>
+
+            <form class="section-v flex-fill"
+                  th:action="${id != null} ? @{'/profile/' + ${id} + '/edit/confirm'} : @{/profile/new/confirm}" 
+                  method="post"
+                  th:object="${requestDto}">
+                  
+                <div class="form-card">
+                    <div class="form-inner" th:for="*{lastName}">
+                        <label for="lastName" class="hstack gap-s">
+                            <span class="text light">性</span>
+                            <span class="text error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+                        </label>
+                        <input class="input" id="lastName" type="text" th:field="*{lastName}" maxlength="10" size="20"/>
+                    </div>
+                    
+                    <div class="form-inner" th:for="*{firstName}">
+                        <label for="firstName" class="hstack gap-s">
+                            <span class="text light">名</span>
+                            <span class="text error" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+                        </label>
+                        <input class="input" id="firstName" type="text" th:field="*{firstName}"/>
+                    </div>
+    
+                    <div class="form-inner" th:for="*{lastNameKana}">
+                        <label for="lastNameKana" class="hstack gap-s">
+                            <span class="text light">姓(カナ)</span>
+                            <span class="text error" th:if="${#fields.hasErrors('lastNameKana')}" th:errors="*{lastNameKana}"></span>
+                        </label>
+                        <input class="input" id="lastNameKana" type="text" th:field="*{lastNameKana}"/>
+                    </div>
+                    
+                    <div class="form-inner" th:for="*{firstNameKana}">
+                        <label for="firstNameKana" class="hstack gap-s">
+                            <span class="text light">名(カナ)</span>
+                            <span class="text error" th:if="${#fields.hasErrors('firstNameKana')}" th:errors="*{firstNameKana}"></span>
+                        </label>
+                        <input class="input" id="firstNameKana" type="text" th:field="*{firstNameKana}"/>
+                    </div>
+    
+                    <div class="form-inner" th:for="*{gender}">
+                        <div class="hstack gap-s">
+                            <span class="text light">性別</span>
+                            <span class="text error" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>
+                        </div>
+                        <div class="hstack gap-s">
+                            <div th:each="g : ${genders}">
+                                <label class="hstack gap-xxs pointer">
+                                    <input class="pointer" type="radio" th:field="*{gender}" th:value="${g}"/>
+                                    <span class="text" th:text="${g.displayName}"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-inner" th:for="*{dateOfBirth}">
+                        <div class="hstack gap-s">
+                            <span class="text light">生年月日</span>
+                            <span class="text error" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></span>
+                        </div>
+                        <div class="hstack gap-s">
+                            <div for="yearSelect" class="hstack gap-xxs">
+                                <select id="yearSelect" class="select">
+                                    <!-- js で生成-->
+                                </select>
+                                <span class="text">年</span>
+                            </div>
+                            <div for="monthSelect" class="hstack gap-xxs">
+                                <select id="monthSelect" class="select">
+                                    <!-- js で生成-->
+                                </select>
+                                <span class="text">月</span>
+                            </div>
+                            <div for="daySelect" class="hstack gap-xxs">
+                                <select id="daySelect" class="select">
+                                    <!-- js で生成-->
+                                </select>
+                                <span class="text">日</span>
+                            </div>
+                        </div>
+                        <input type="hidden" th:field="*{dateOfBirth}" id="dateOfBirthHidden"/>
+                    </div>
+                    
+                    <div class="form-inner border-none" th:for="*{birthplace}">
+                        <div class="hstack gap-s">
+                            <span class="text light">出身地</span>
+                            <span class="text error" th:if="${#fields.hasErrors('birthplace')}" th:errors="*{birthplace}"></span>
+                        </div>
+                        <select class="select" th:field="*{birthplace}">
+                            <option value="">-- 選択してください --</option>
+                            <option th:each="b : ${birthplaces}" th:value="${b}" th:text="${b.displayName}"></option>
+                        </select>
+                    </div>
+                </div>
+            
+                <div class="vstack gap-xxs">
+                    <div class="hstack gap-s">
+                        <h5>メモ</h5>
+                        <span class="text error" th:if="${#fields.hasErrors('memo')}" th:errors="*{memo}"></span>
+                    </div>
+                    <textarea class="textarea" th:field="*{memo}" placeholder="任意(200文字以内)"></textarea>
+                </div>
+                
+                <div class="hstack gap-s">
+                    <label for="agree" class="hstack gap-xxs pointer">
+                        <span class="text">入力内容に同意する</span>
+                        <input class="pointer" type="checkbox" id="agree" name="agree">
+                    </label>
+                    <span class="text error" th:if="${agreeError}">同意チェック必要です</span>
+                </div>
+                
+                <div class="hstack gap-s center">
+                    <a th:if="${id != null}" th:href="@{/profile/{id}(id=${id})}">
+                        <span class="btn btn-text">キャンセル</span>
+                    </a>
+                    <a th:if="${id == null}" th:href="@{/(page=${page}, size=${size}, profileColumn=${profileColumn}, asc=${asc}, activity=${activity})}">
+                        <span class="btn btn-text">キャンセル</span>
+                    </a>
+                    <button class="btn btn-text" type="submit">
+                        <span>確認</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- js -->
+             <script type="module" th:src="@{/js/DatePicker.js}"></script>
+        </div>
+    </div>
+</div>

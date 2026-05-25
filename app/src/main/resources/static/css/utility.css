@@ -1,0 +1,38 @@
+/* ===== ユーティリティ ===== */
+.flex-fill {
+  flex: 1;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.visibility-hidden {
+  visibility: hidden;
+}
+
+.text {
+  color: var(--color-text);
+  padding: 2.5px 0 0 0;
+}
+
+.text.right {
+    text-align: right;
+}
+
+.text.light {
+    color: var(--color-text-light);
+}
+
+.text.white {
+    color: var(--color-text-white);
+}
+
+.text.bold {
+    font-weight: 600;
+}
+
+.text.error {
+    font-size: 0.6rem;
+    color: var(--color-danger);
+}

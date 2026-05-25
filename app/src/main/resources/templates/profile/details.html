@@ -1,0 +1,121 @@
+<div th:replace="~{layout :: layout(~{::content})}">
+    <div th:fragment="content">
+        <div class="container">
+            <!-- コンテナタイトル -->
+            <div class="container-title">
+                <h1>詳細</h1>
+                <button id="btn-setting" class="btn" th:insert="~{fragments/icons :: icon-setting}"></button>
+                
+                <!-- ポップアップ -->
+                <div th:replace="~{fragments/popupmenu :: details}"></div>
+            </div>
+
+            <!-- 人物詳細カード -->
+            <div class="section-v flex-fill">
+                <!-- アバター -->
+                <div class="section-h">
+                    <div class="avatar-wrapper">
+                        <div id="avatar-skeleton" class="avatar-skeleton">読み込み中</div>
+                        <div id="avatar" class="avatar hidden">
+                            <span id="avatar-name" class="text bold"></span>
+                        </div>
+                        <div th:if="${profile.status}" id="avatar-update" class="hover-area left">
+                            <span class="text white">変更</span>
+                        </div>
+                        <div th:if="${profile.status}" id="avatar-delete" class="hover-area right hover-area--hidden">
+                            <span class="text white">削除</span>
+                        </div>
+                        <button th:if="${profile.status}" id="btn-avatar-info" class="avatar-info" th:insert="~{fragments/icons :: icon-info}"></button>
+                    </div>
+                    
+                    <!-- ポップアップ -->
+                    <div th:replace="~{fragments/info :: avatar}"></div>
+                </div>
+
+                <!-- hiddenでイメージデータ送信 -->
+                <input type="file"
+                       id="avatar-input"
+                       name="avatar-input"
+                       accept="image/png, image/jpeg"
+                       style="display:none">
+
+                <!-- 詳細カード -->
+                <div class="details-card">
+                    <div class="details-inner">
+                        <span class="text light">No</span>
+                        <span class="text" th:text="${profile.personalNumber}"></span>
+                    </div>
+                    <div class="details-inner">
+                        <span class="text light">氏名</span>
+                        <span class="text" th:text="${profile.fullName}"></span>
+                    </div>
+                    <div class="details-inner">
+                        <span class="text light">氏名(カナ)</span>
+                        <span class="text" th:text="${profile.fullNameKana}"></span>
+                    </div>
+                    <div class="details-inner">
+                        <span class="text light">性別</span>
+                        <span class="text" th:text="${profile.gender}"></span>
+                    </div>
+                    <div class="details-inner">
+                        <span class="text light">生年月日</span>
+                        <span class="text" th:text="${profile.dateOfBirth}"></span>
+                    </div>
+                    <div class="details-inner">
+                        <span class="text light">年齢</span>
+                        <span class="text" th:text="${profile.age}"></span>
+                    </div>
+                    <div class="details-inner">
+                        <span class="text light">出身地</span>
+                        <span class="text" th:text="${profile.birthplace}"></span>
+                    </div>
+                    <div class="details-inner">
+                        <span class="text light">作成日</span>
+                        <span class="text" th:text="${profile.createdAt}"></span>
+                    </div>
+                    <div class="details-inner border-none">
+                        <span class="text light">更新日</span>
+                        <span class="text" th:text="${profile.updatedAt}"></span>
+                    </div>
+                </div>
+
+                <!-- メモがあれば表示 -->
+                <div th:if="${profile.memo != ''}" class="vstack gap-xxs">
+                    <h5>メモ</h5>
+                    <div class="memo" th:text="${profile.memo}"></div>
+                </div>
+
+                <div class="hstack center">
+                    <a th:href="@{/(page=${page}, size=${size}, profileColumn=${profileColumn}, asc=${asc}, activity=${activity})}">
+                        <spa class="btn btn-text">戻る</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- バックドロップ -->
+            <div id="backdrop" class="backdrop hidden"></div>
+
+            <!-- トースト -->
+            <div id="toast" class="toast hidden">
+                <div class="hstack gap-xxs">
+                    <div class="toast-icon-area">
+                        <span id="toast-success" class="toast-success hidden" th:insert="~{fragments/icons :: icon-success}"></span>
+                        <span id="toast-faile" class="toast-faile hidden" th:insert="~{fragments/icons :: icon-faile}"></span>
+                    </div>
+                    <span id="toast-message" class="text light"></span>
+                </div>
+            </div>
+
+            <!-- js -->
+            <script th:inline="javascript">
+                /*<![CDATA[*/
+                    const profileId = /*[[${profile.id}]]*/ "";
+                    const profileFullName = /*[[${profile.fullName}]]*/ "";
+                    const hasAvatar = /*[[${profile.avatar}]]*/ "";
+                    const flashMessage = /*[[${flashMessage}]]*/ "";
+                /*]]*/
+            </script>
+            <script type="module" th:src="@{/js/DetailsController.js}"></script>
+        </div>
+    </div>
+</div>

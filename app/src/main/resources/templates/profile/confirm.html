@@ -1,0 +1,71 @@
+<div th:replace="~{layout :: layout(~{::content})}">
+  	<div th:fragment="content">
+		<div class="container">
+			<div class="container-title">
+				<h1 th:text="${title}">確認画面</h1>
+			</div>
+
+			<div class="section-v flex-fill">
+				<div class="confirm-card">
+					<div class="confirm-inner">
+						<span class="text light">氏名</span>
+						<div class="hstack gap-xxs">
+							<span class="text" th:text="${requestDto.lastName}"></span>
+							<span class="text" th:text="${requestDto.firstName}"></span>
+						</div>
+					</div>
+					
+					<div class="confirm-inner">
+						<span class="text light">氏名(カナ)</span>
+						<div class="hstack gap-xxs">
+							<span class="text" th:text="${requestDto.lastNameKana}"></span>
+							<span class="text" th:text="${requestDto.firstNameKana}"></span>
+						</div>
+					</div>
+		
+					<div class="confirm-inner">
+						<span class="text light">性別</span>
+						<span class="text" th:text="${requestDto.gender.displayName}"></span>
+					</div>
+		
+					<div class="confirm-inner">
+						<span class="text light">生年月日</span>
+						<span class="text" th:text="${requestDto.dateOfBirth}"></span>
+					</div>
+		
+					<div class="confirm-inner border-none">
+						<span class="text light">出身地</span>
+						<span class="text" th:text="${requestDto.birthplace.displayName}"></span>
+					</div>
+				</div>
+
+				<div th:if="${requestDto.memo != ''}" class="vstack gap-xxs">
+					<h5>メモ</h5>
+					<div class="memo" th:text="${requestDto.memo}"></div>
+				</div>
+
+				<div class="hstack gap-s center">
+					<a th:if="${id == null}" th:href="@{/profile/new/back}">
+					   <span class="btn btn-text">戻る</span>
+					</a>
+		
+					<a th:if="${id != null}" th:href="@{/profile/{id}/edit/back(id=${id})}">
+					   <span class="btn btn-text">戻る</span>
+					</a>
+		
+					<form th:if="${id == null}" th:action="@{/profile/insert}" method="post">
+						<button type="submit" class="btn btn-text">
+							<span>登録</span>
+						</button>
+					</form>
+		
+					<form th:if="${id != null}" th:action="@{/profile/{id}/update(id=${id})}" method="post">
+						<button type="submit" class="btn btn-text">
+							<span>更新</span>
+						</button>
+					</form>
+				</div>
+			</div>
+		<div>
+  	</div>
+</div>

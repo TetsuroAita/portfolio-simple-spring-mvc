@@ -1,0 +1,113 @@
+<div th:replace="~{layout :: layout(~{::content})}"> 
+    <div th:fragment="content">
+        <div class="container">
+            <div class="container-title">
+                <h1 th:text="${activity} ? プロフィール : 削除した項目"></h1>
+                <div class="hstack gap-xxs">
+                    <a th:if="${activity}" th:href="@{/profile/new}">
+                        <span class="btn" th:insert="~{fragments/icons :: icon-new}"></span>
+                    </a>
+                    <button id="btn-setting" class="btn" th:insert="~{fragments/icons :: icon-setting}"></button>
+
+                    <!-- ポップアップメニュー -->
+                    <div th:replace="~{fragments/popupmenu :: list}"></div>
+                </div>
+            </div>
+            
+            <div class="section-v">
+                <span th:if="${!empty}" th:text="|${totalElements}件|" class="text right"></span>
+                <div class="table-wrapper">
+                    <table th:if="${!empty}" class="table">
+                        <thead>
+                            <tr>
+                                <th th:each="col : ${profileColumns}"
+                                    th:onclick="|location.href='@{/(page=0, size=${size}, profileColumn=${col}, asc=${col == profileColumn ? !asc : true}, activity=${activity})}'|"
+                                    class="pointer">
+
+                                    <span th:text="${col.label}"></span>
+
+                                    <th:block th:if="${col == profileColumn}">
+                                        <span th:text="${asc? '▲' : '▼'}"></span>
+                                    </th:block>
+
+                                    <th:block th:unless="${col == profileColumn}">
+                                        <span>▽</span>
+                                    </th:block>
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="profile : ${profiles}"
+                                th:onclick="|location.href='@{/profile/{id}(id=${profile.id})}'|"
+                                class="table-lowlink">
+                                <td th:text="${profile.personalNumber}"></td>
+                                <td th:text="${profile.fullName}"></td>
+                                <td th:text="${profile.gender}"></td>
+                                <td th:text="${profile.age}"></td>
+                                <td>
+                                    <span th:insert="~{fragments/icons :: icon-right}"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table th:if="${empty}" class="table">
+                        <thead>
+                            <tr>
+                                <th th:each="col : ${profileColumns}">
+                                    <span th:text="${col.label}"></span>
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="5">
+                                    <span class="text">データがありません</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div th:if="${!empty}" class="hstack gap-s center">
+                    <a th:if="${hasPrevious}" th:href="@{/(page=${page - 1}, size=${size}, profileColumn=${profileColumn}, asc=${asc}, activity=${activity})}">
+                        <span th:insert="~{fragments/icons :: icon-left}"></span>
+                    </a>
+                    <div th:unless="${hasPrevious}" class="visibility-hidden">
+                        <span th:insert="~{fragments/icons :: icon-left}"></span>
+                    </div>
+                    <span class="text" th:text="|${page + 1} / ${totalPages}|"></span>
+                    <a th:if="${hasNext}" th:href="@{/(page=${page + 1}, size=${size}, profileColumn=${profileColumn}, asc=${asc}, activity=${activity})}">
+                        <span th:insert="~{fragments/icons :: icon-right}"></span>
+                    </a>
+                    <div th:unless="${hasNext}" class="visibility-hidden">
+                        <span th:insert="~{fragments/icons :: icon-right}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- バックドロップ -->
+            <div id="backdrop" class="backdrop hidden"></div>
+
+            <!-- トースト -->
+            <div id="toast" class="toast hidden">
+                <div class="hstack gap-xxs">
+                    <div class="toast-icon-area">
+                        <span id="toast-success" class="toast-success hidden" th:insert="~{fragments/icons :: icon-success}"></span>
+                        <span id="toast-faile" class="toast-faile hidden" th:insert="~{fragments/icons :: icon-faile}"></span>
+                    </div>
+                    <span id="toast-message" class="text light"></span>
+                </div>
+            </div>
+
+            <!-- js -->
+            <script th:inline="javascript">
+                /*<![CDATA[*/
+                    const flashMessage = /*[[${flashMessage}]]*/ "";
+                /*]]*/
+            </script>
+            <script type="module" th:src="@{/js/ListController.js}"></script>
+        </div>
+    </div>
+</div>

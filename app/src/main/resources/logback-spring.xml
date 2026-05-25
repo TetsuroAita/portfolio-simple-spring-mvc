@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+
+    <!--開発用-->
+    <springProfile name="dev">
+
+        <!--コンソール出力-->
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>
+                    %cyan(%d{yyyy-MM-dd HH:mm:ss})
+                    %gray([%thread])
+                    %highlight(%-5level)
+                    %green(%logger{36})
+                    - %msg%n
+                </pattern>
+            </encoder>
+        </appender>
+
+        <!--ルートロガー-->
+        <root level="INFO">
+            <appender-ref ref="CONSOLE" />
+        </root>
+
+        <!-- 開発環境においては自身のパッケージだけDEBUG -->
+        <logger name="com.example.portfolio_simple_spring_mvc" level="DEBUG" />
+
+    </springProfile>
+
+</configuration>

@@ -1,0 +1,27 @@
+{
+    "name": "portfolio-app",
+    "dockerComposeFile": ["../../docker-compose.yml"],
+    "service": "app",
+    "workspaceFolder": "/home/vscode/workspace/app",
+    "postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+    "remoteUser": "vscode",
+    "shutdownAction": "stopCompose",
+    "runServices": ["app", "db"],
+    "containerEnv": {
+        "LANG": "ja-JP.UTF-8",
+        "LC_ALL": "ja-JP.UTF-8",
+        "TZ": "Asia/Tokyo"
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "java.compile.nullAnalysis.mode": "disabled",
+                "java.configuration.updateBuildConfiguration": "automatic"
+            },
+            "extensions": [
+                "vscjava.vscode-java-pack",
+                "vscjava.vscode-spring-initializr"
+            ]
+        }
+    }
+}

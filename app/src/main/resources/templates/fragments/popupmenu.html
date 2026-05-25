@@ -1,0 +1,61 @@
+<div th:fragment="list" id="popupmenu-list" class="popupmenu-card hidden">
+    <label class="popupmenu-inner">
+        <input type="radio" style="display: none;"
+                th:checked="${activity}"
+                th:onclick="|location.href='@{/(profileColumn=PERSONAL_NUMBER, asc=true, activity=true)}'|">
+        <span th:style="${activity} ? '' : 'visibility: hidden;'">
+            <div th:replace="~{fragments/icons :: icon-check}"></div>
+        </span>
+        <span>
+            <div th:replace="~{fragments/icons :: icon-profile-list}"></div>
+        </span>
+        <span class="text">プロフィール</span>
+    </label>
+    <label class="popupmenu-inner">
+        <input type="radio" style="display: none;"
+                th:checked="${!activity}"
+                th:onclick="|location.href='@{/(profileColumn=PERSONAL_NUMBER, asc=true, activity=false)}'|">
+        <span th:style="${!activity} ? '' : 'visibility: hidden;'">
+            <div th:replace="~{fragments/icons :: icon-check}"></div>
+        </span>
+        <span>
+            <div th:replace="~{fragments/icons :: icon-trash}"></div>
+        </span>
+        <span class="text">削除した項目</span>
+    </label>
+</div>
+
+<div th:fragment="details" id="popupmenu-details" class="popupmenu-card hidden">
+    <a th:if="${profile.status}"
+       th:href="@{/profile/{id}/edit(id=${profile.id})}"
+       class="popupmenu-inner">
+        <span>
+            <div th:replace="~{fragments/icons :: icon-edit}"></div>
+        </span>
+        <span class="text">編集</span>
+    </a>
+    <form th:if="${!profile.status}"
+          th:action="@{/profile/{id}/un-deleted(id=${profile.id})}"
+          method="post">
+        <button type="submit" class="popupmenu-inner" onclick="return confirm('削除を取り消しますか?');">
+            <div th:replace="~{fragments/icons :: icon-recovery}"></div>
+            <span class="text">取消</span>
+        </button>
+    </form>
+    <form th:if="${profile.status}"
+          th:action="@{/profile/{id}/delete(id=${profile.id})}"
+          method="post">
+        <button type="submit" class="popupmenu-inner" onclick="return confirm('削除しますか?\nこの操作は削除した項目から取消が可能です。');">
+            <div th:replace="~{fragments/icons :: icon-trash}"></div>
+            <span class="text">削除</span>
+        </button>
+    </form>
+    <form th:if="${!profile.status}"
+          th:action="@{/profile/{id}/delete(id=${profile.id})}"
+          method="post">
+        <button type="submit" class="popupmenu-inner" onclick="return confirm('完全に削除され復元することはできません。\n本当に削除しますか？');">
+            <div th:replace="~{fragments/icons :: icon-trash}"></div>
+            <span class="text">完全削除</span>
+        </button>
+    </form>
+</div>

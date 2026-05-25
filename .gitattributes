@@ -1,0 +1,46 @@
+# ────────────────────────────────
+# 改行コードの統一
+* text=auto
+
+# Maven Wrapper
+/mvnw text eol=lf
+/mvnw.cmd text eol=crlf
+.mvn/wrapper/maven-wrapper.jar binary
+
+# シェルスクリプトは LF 固定
+*.sh text eol=lf
+
+# バッチファイルは CRLF 固定（Windows 用）
+*.bat text eol=crlf
+
+# ────────────────────────────────
+# バイナリファイルは差分を作らない
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.zip binary
+*.jar binary
+*.war binary
+*.ear binary
+*.class binary
+
+# ────────────────────────────────
+# ソースコード・設定ファイルは text として扱う
+*.java text
+*.xml text
+*.properties text
+*.yml text
+*.yaml text
+*.md text
+*.sql text
+
+# ────────────────────────────────
+# JSON やその他マージに注意するファイル（必要に応じて）
+*.json merge=union
+
+# ────────────────────────────────
+# DevContainer / VSCode 設定
+.devcontainer/ text
+.vscode/ text

@@ -1,0 +1,62 @@
+spring:
+  config:
+    activate:
+      on-profile: test
+
+  security:
+    user:
+      name: admin
+      password: admin123
+
+  boot:
+    admin:
+      client:
+        url: http://health-monitor:8081
+        username: admin
+        password: admin123
+        instance:
+          metadata:
+            user.name: admin
+            user.password: admin123
+
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: false
+        dialect: org.hibernate.dialect.H2Dialect
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    default-property-inclusion: non_null
+    property-naming-strategy: SNAKE_CASE
+    deserialization:
+      fail-on-unknown-properties: false
+
+  sql:
+    init:
+      mode: always
+      schema_locations: classpath:db/schema.sql
+      data_locations: classpath:db/data.sql
+
+scheduler:
+  delete-avatars:
+    fixed-rate-ms: 100
+    initial-delay: 100
+
+storage:
+  project-url: https://sample.com
+  api-key: abc
+  bucket-name-avatar: test_bucket
+  expires-in: 1L

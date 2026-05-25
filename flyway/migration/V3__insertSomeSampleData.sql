@@ -1,0 +1,36 @@
+INSERT INTO app.profile(id, created_at, updated_at, active, personal_number, last_name, first_name, last_name_kana, first_name_kana, gender, date_of_birth, birthplace, memo, avatar_id) VALUES
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '001', '鈴木', '治', 'スズキ', 'オサム', 'MALE', '1980-04-10', 'TOKYO', '趣味は読書です。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '002', '佐藤', '誠', 'サトウ', 'マコト', 'MALE', '1974-05-16', 'SAITAMA', 'よろしくお願いします。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '003', '渡辺', '舞', 'ワタナベ', 'マイ', 'FEMALE', '2006-01-15', 'FUKUOKA', '趣味は読書です。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '004', '加藤', '翼', 'カトウ', 'ツバサ', 'MALE', '1987-08-14', 'TOKYO', '最近キャンプにハマっています。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '005', '加藤', '結衣', 'カトウ', 'ユイ', 'FEMALE', '2005-04-22', 'SAITAMA', '旅行が大好きです。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '006', '高橋', '舞', 'タカハシ', 'マイ', 'FEMALE', '1982-05-01', 'AICHI', '最近キャンプにハマっています。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '007', '佐藤', '愛', 'サトウ', 'アイ', 'FEMALE', '1997-05-18', 'CHIBA', '最近キャンプにハマっています。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '008', '小林', '彩香', 'コバヤシ', 'アヤカ', 'FEMALE', '2005-05-14', 'SAITAMA', '特技はテニスです。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '009', '田中', '誠', 'タナカ', 'マコト', 'MALE', '1983-07-19', 'OSAKA', 'よろしくお願いします。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '010', '山本', '凛', 'ヤマモト', 'リン', 'FEMALE', '2005-03-19', 'CHIBA', '旅行が大好きです。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '011', '高橋', '亮', 'タカハシ', 'リョウ', 'MALE', '1995-04-15', 'SAITAMA', '最近キャンプにハマっています。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '012', '佐藤', '葵', 'サトウ', 'アオイ', 'FEMALE', '1989-02-19', 'FUKUOKA', '映画鑑賞が趣味です。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '013', '高橋', '拓海', 'タカハシ', 'タクミ', 'MALE', '1997-08-22', 'TOKYO', '趣味は読書です。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '014', '渡辺', '直樹', 'ワタナベ', 'ナオキ', 'MALE', '1970-05-27', 'AICHI', '最近キャンプにハマっています。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '015', '鈴木', '結衣', 'スズキ', 'ユイ', 'FEMALE', '2003-08-02', 'KANAGAWA', '特技はテニスです。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '016', '加藤', '大輔', 'カトウ', 'ダイスケ', 'MALE', '1981-02-28', 'TOKYO', '映画鑑賞が趣味です。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '017', '山本', '大輔', 'ヤマモト', 'ダイスケ', 'MALE', '1991-04-07', 'KANAGAWA', '映画鑑賞が趣味です。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '018', '小林', '舞', 'コバヤシ', 'マイ', 'FEMALE', '2004-06-20', 'KANAGAWA', '最近キャンプにハマっています。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '019', '小林', '誠', 'コバヤシ', 'マコト', 'MALE', '1985-12-14', 'AICHI', '旅行が大好きです。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '020', '渡辺', '拓海', 'ワタナベ', 'タクミ', 'MALE', '1989-03-18', 'SAITAMA', 'よろしくお願いします。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '021', '中村', '凛', 'ナカムラ', 'リン', 'FEMALE', '2001-02-25', 'AICHI', '最近キャンプにハマっています。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '022', '加藤', '亮', 'カトウ', 'リョウ', 'MALE', '1985-08-06', 'HOKKAIDO', '特技はテニスです。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '023', '佐藤', '亮', 'サトウ', 'リョウ', 'MALE', '1981-03-31', 'HOKKAIDO', 'よろしくお願いします。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '024', '小林', '彩香', 'コバヤシ', 'アヤカ', 'FEMALE', '2002-03-26', 'HOKKAIDO', '映画鑑賞が趣味です。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '025', '高橋', '愛', 'タカハシ', '愛', 'FEMALE', '1992-06-23', 'SAITAMA', '特技はテニスです。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '026', '伊藤', '美咲', 'イトウ', 'ミサキ', 'FEMALE', '1984-09-15', 'SAITAMA', '特技はテニスです。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '027', '鈴木', '葵', 'スズキ', 'アオイ', 'FEMALE', '1998-01-28', 'AICHI', '趣味は読書です。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '028', '山本', '優子', 'ヤマモト', 'ユウコ', 'FEMALE', '1981-02-15', 'SAITAMA', '特技はテニスです。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '029', '高橋', '彩香', 'タカハシ', 'アヤカ', 'FEMALE', '1998-01-13', 'HOKKAIDO', 'よろしくお願いします。', NULL),
+(gen_random_uuid(), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'TRUE', '030', '加藤', '亮', 'カトウ', 'リョウ', 'MALE', '2002-04-12', 'OSAKA', 'よろしくお願いします。', NULL);
+
+UPDATE app.sequence
+SET current_value = 30,
+    updated_at = CURRENT_TIMESTAMP
+WHERE name = 'PERSONAL_NUMBER';
